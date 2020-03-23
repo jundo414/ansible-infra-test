@@ -1,0 +1,19 @@
+---
+- name: "users exist"
+  user:
+    name: "{{ item.name }}"
+    state: present
+    password: "{{ item.password }}"
+    groups: "{{ item.groups }}"
+  with_items:
+    - { name: stack, password: falcon, groups: stack }
+
+- name: "~/.ssh for users exsit"
+  file:
+    path: "/home/{{item.name}}/.ssh"
+    state: directory
+    owner: "{{ item.name }}"
+    group: "{{ item.groups }}"
+    mode: 0700
+  with_items:
+    - { name: stack, groups: stack }
