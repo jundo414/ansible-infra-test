@@ -1,0 +1,12 @@
+---
+- name: Check rpm versions
+  shell: "rpm -qi {{ target.name }} | grep Version | awk '{ print $3 }'"
+  register: output
+  changed_when: false
+
+- name: version compare
+  debug:
+    msg: "SUCCESS: {{ output.stdout }} > {{ target.min_version }}"
+  failed_when: 
+    - output.stdout_lines|length == 0
+    - output.stdout is version({{ target.min_version }}, '<')

@@ -1,48 +1,8 @@
 ---
-# dir:
-#  path: "/var/tmp"
-#  user: "root"
-#  group: "root"
-#  mode: 644
-#
-#file:
-#  path: "/etc/passwd"
-#  user: "root"
-#  group: "root"
-#  mode: 644
-#
-#package:
-#  name: "nginx"
-#  is_installed: True
-#  version: ">= 1.2"
-#
-#service:
-#  name: "nginx"
-#  is_running: True
-#  is_enabled: True
-#
-#ini_file:
-#  file: ”/usr/local/etc/testfile.ini”
-#  - section: "DEFAULT"
-#    validations:
-#      - "^variable1\s*=\s*value1$"
-#      - "^variable2\s*=\s*value2$"
-#  - section: "neutron"
-#    validations:
-#      - "^variable1\s*=\s*value1$"
-#      - "^variable3\s*=\s*value3$"
-#      - "^variable4\s*=\s*value4$"
-#
-#bash:
-#  command: "date | wc -l"
-#  rc: "== 0"
-#  value: "1"
-#
-#api:
-#  - "xxx:
-
-    - name: "check if httpd has port 80 open"
-      shell: ss -ltn state listening sport = :80 | grep -v " Local Address:Port"
-      register: output
-      failed_when: output.stdout_lines|length == 0 
-
+- include_tasks: dir.yml
+- include_tasks: file.yml
+- include_tasks: package.yml
+- include_tasks: service.yml
+- include_tasks: port.yml
+- include_tasks: bash.yml
+#- include_tasks: api.yml

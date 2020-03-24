@@ -1,0 +1,21 @@
+---
+# dir:
+#  path: "/var/tmp"
+#  user: "root"
+#  group: "root"
+#  mode: 644
+
+- name: directory check
+  stat:
+    path: "{{ target.path }}"
+  register: output
+
+- name: skip task
+  debug:
+    msg: "SUCCESS: {{ target.path }}"
+  failed_when:
+    - output.stat.exists is not true
+    - output.stat.isdir is not true
+    - output.stat.mode != {{ target.mode }}
+    - output.stat.pw_name != {{ target.user }}
+    - output.stat.gr_name != {{ target.group }}

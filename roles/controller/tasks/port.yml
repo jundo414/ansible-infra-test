@@ -1,0 +1,9 @@
+---
+- name: "check if httpd has port 80 open"
+  shell: ss -ltn state listening sport = :{{ item }} | grep -v " Local Address:Port"
+  register: output
+  failed_when: output.stdout_lines|length == 0
+  changed_when: false
+  with_items:
+    - "22"
+    - "80"

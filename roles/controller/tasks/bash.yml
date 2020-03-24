@@ -1,0 +1,7 @@
+---
+- include_tasks: _filesystem.yml
+  with_items:
+    - { filesystem: /dev/mapper/centos-root,  size: 17G, mountpoint: /}
+    - { filesystem: /dev/sda1,  size: 1014M, mountpoint: /boot}
+  loop_control:
+    loop_var: target

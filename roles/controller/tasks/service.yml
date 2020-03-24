@@ -1,0 +1,25 @@
+---
+#service:
+#  name: "nginx"
+#  is_running: True
+#  is_enabled: True
+
+- name: service enable check
+  shell: systemctl is-enabled {{ item.service }}
+  register: result
+  with_items:
+    - { service: NetworkManager.service, flag: enabled }
+    - { service: vsftpd.service, flag: disabled }
+  failed_when:
+    - result.stdout != item.flag
+  changed_when: false
+
+- name: service start check
+  shell: systemctl status {{ item.service }} | grep "Active" | awk '{print $2}'
+  register: result
+  with_items:
+    - { service: NetworkManager.service, status: active }
+    - { service: vsftpd.service, status: inactive }
+  failed_when:
+    - result.stdout != item.status
+  changed_when: false

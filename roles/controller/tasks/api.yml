@@ -1,0 +1,21 @@
+---
+- name: iLO power state
+  bash: curl -s https://172.26.107.171/redfish/v1/Systems/1/ --insecure -u Administrator:Administrator | jq ".Status.State"
+  register: result
+  failed_when:
+    - result.stdout != Enabled
+
+- name: get keystone token
+  bash: curl -si -d @token-request.json -H "Content-type: application/json" http://localhost:35357/v3/auth/tokens | awk '/X-Subject-Token/ {print $2}'
+    register: token
+
+- name: get keystone token
+  bash: curl -si -d @token-request.json -H "Content-type: application/json" http://localhost:35357/v3/auth/tokens | jq ".token.project.id"
+    register: project_id
+
+- name: iLO
+  uri:
+    url: http://localhost:8774/v2.1/{{project_id}}/servers
+    headers:
+      X-Auth-Token: {{ token.stdout }}
+    method: GET

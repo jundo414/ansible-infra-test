@@ -1,0 +1,7 @@
+---
+- include_tasks: _dir.yml
+  with_items:
+    - { path: /home/stack/test, mode: 0755, user: stack, group: stack }
+    - { path: /var/tmp, mode: 1777, user: root, group: root }
+  loop_control:
+    loop_var: target

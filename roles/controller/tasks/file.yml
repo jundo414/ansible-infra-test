@@ -1,0 +1,20 @@
+---
+- include_tasks: _file.yml
+  with_items:
+    - { path: /var/www/html/ks/centos7-ks.cfg, mode: 0644, user: root, group: root }
+    - { path: /etc/ssh/sshd_config, mode: 1600, user: root, group: root }
+  loop_control:
+    loop_var: target
+
+- name: check nova.conf parameters
+  shell: crudini --get /var/tmp/nova.conf {{ item. section }} {{ item.key }}
+  register: result
+  with_items:
+    - { section: "DEFAULT", key: "my_ip", value: "10.0.0.11" }
+    - { section: "libvirt", key: "virt_type", value: "kvm" }
+  failed_when:
+    - result.stdout != item.value
+  changed_when: false
+
+
+
