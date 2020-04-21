@@ -1,0 +1,21 @@
+---
+- name: "check the rpm packages.."
+  check_package:
+    name: "{{ item.name }}"
+    is_installed: "{{ item.is_installed }}"
+    version: "{{ item.version }}"
+    flag: "{{ item.flag }}"
+  with_items:
+    - { name: "httpd", is_installed: True, version: "2.4", flag: ">=" }
+    - { name: "gzip", is_installed: True, version: "1.2", flag: ">" }
+    - { name: "python", is_installed: True, version: "2.7.5", flag: "==" }
+  ignore_errors: yes
+
+- name: "check the rpm packages.."
+  check_package:
+    name: "{{ item.name }}"
+    is_installed: "{{ item.is_installed }}"
+  with_items:
+    - { name: "bind", is_installed: False }
+    - { name: "bind-utils", is_installed: False }
+  ignore_errors: yes

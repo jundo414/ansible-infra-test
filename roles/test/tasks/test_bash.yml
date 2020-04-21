@@ -1,0 +1,41 @@
+---
+- name: "test"
+  test_bash:
+    command: "{{ item.command }}"
+    rc: "{{ item.rc }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { command: "date | wc -l", rc: 0, value: "1"}
+  ignore_errors: yes
+
+- name: "test"
+  test_bash:
+    command: "{{ item.command }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { command: "/usr/bin/calc_sum 1 4", value: "5"}
+  ignore_errors: yes
+
+- name: "test"
+  test_bash:
+    command: "{{ item.command }}"
+    rc: "{{ item.rc }}"
+  with_items:
+    - { command: "hostname -s", rc: 0}
+  ignore_errors: yes
+
+- name: "test"
+  test_bash:
+    command: "{{ item.command }}"
+    value: '{{ item.value }}'
+  with_items:
+    - { command: "cinder list", value: r'*cinder-volume*cotoller@cdot-nfs*enabled*up*'}
+  ignore_errors: yes
+
+- name: "test"
+  test_bash:
+    command: "{{ item.command }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { command: "cinder list", value: r'\|\s+cinder-volume\s+\|\s+\cotoller@cdot-nfs\s+\|\s+nova\s+\|\s+enabled\s+\|\s+up\s+\|\s+.*\s+\|\s+.*\s+\|'}
+  ignore_errors: yes

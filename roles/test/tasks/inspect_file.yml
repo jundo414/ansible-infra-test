@@ -1,0 +1,14 @@
+---
+- name: "test"
+  inspect_file:
+    file: "/etc/sysconfig/network-scripts/ifcfg-enp0s3"
+    validations:
+      - "^TYPE=Ethernet$"
+      - "^BOOTPROTO=static$"
+      - "^DEFROUTE=yes$"
+      - "^NAME=enp0s3$"
+      - "^DEVICE=enp0s3$"
+      - "^ONBOOT=yes$"
+      - "^IPADDR=172.16.12.1$"
+      - "^NETMASK=255.255.255.0$"
+  ignore_errors: yes

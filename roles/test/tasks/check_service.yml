@@ -1,0 +1,10 @@
+---
+- name: "test"
+  check_service:
+    name: "{{ item.name }}"
+    is_running: "{{ item.is_running }}"
+    is_enabled: "{{ item.is_enabled }}"
+  with_items:
+    - { name: "httpd.service", is_running: True, is_enabled, True }
+    - { name: "cpupower.service", is_running: False, is_enabled, False }
+  ignore_errors: yes

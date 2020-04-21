@@ -1,0 +1,11 @@
+---
+- import_tasks: check_listen.yml
+- import_tasks: check_dir.yml
+- import_tasks: check_file.yml
+- import_tasks: check_package.yml
+- import_tasks: check_service.yml
+- import_tasks: inspect_file.yml
+- import_tasks: inspect_ini.yml
+- import_tasks: test_bash.yml
+- import_tasks: test_api.yml
+

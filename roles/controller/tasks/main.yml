@@ -1,8 +1,0 @@
----
-- include_tasks: dir.yml
-- include_tasks: file.yml
-- include_tasks: package.yml
-- include_tasks: service.yml
-- include_tasks: port.yml
-- include_tasks: bash.yml
-#- include_tasks: api.yml

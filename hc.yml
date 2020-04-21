@@ -1,4 +1,0 @@
-- hosts: hc
-  roles:
-    - common
-    - controller

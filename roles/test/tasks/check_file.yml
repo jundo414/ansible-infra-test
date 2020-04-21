@@ -1,0 +1,10 @@
+---
+- name: "check directory.."
+  check_file:
+    path: "{{ item.path }}"
+    user: "{{ item.user }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { path: "/etc/passwd", user: "root", group: "root", mode: "0644" }
+  ignore_errors: yes

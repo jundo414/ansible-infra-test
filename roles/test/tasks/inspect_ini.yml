@@ -1,0 +1,13 @@
+---
+- name: "test"
+  inspect_ini:
+    file: "{{ item.file }}"
+    section: "{{ item.section }}"
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { file: "/etc/nova/nova.conf", section: "DEFAULT", key: "verbose", value: "True" }
+    - { file: "/etc/nova/nova.conf", section: "DEFAULT", key: "vncserver_listen", value: "192.168.206.130" }
+    - { file: "/etc/nova/nova.conf", section: "glance", key: "api_servers", value: "192.168.206.130:9292" }
+    - { file: "/etc/nova/nova.conf", section: "libvirt", key: "virt_type", value: "qemu" }
+  ignore_errors: yes

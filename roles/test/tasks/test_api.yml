@@ -1,0 +1,16 @@
+---
+- name: "test"
+  test_redfish_api:
+    url: "https://192.168.3.108/redfish/v1/Systems/System.Embedded.1/"
+    username: "root"
+    password: "calvin"
+    item: "PowerState"
+  ignore_errors: yes
+
+- name: "test"
+  test_redfish_api:
+    url: "https://192.168.3.108/redfish/v1/Systems/System.Embedded.1/"
+    username: "root"
+    password: "calvin"
+    item: "PowerState"
+  ignore_errors: yes

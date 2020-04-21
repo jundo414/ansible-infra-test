@@ -1,0 +1,35 @@
+---
+- name: "check the listen ports.."
+  check_listen:
+    proto: "{{ item.proto }}"
+    addr: "{{ item.addr }}"
+    port: "{{ item.port }}"
+  with_items:
+    - { proto: "tcp", addr: "10.16.56.101", port: "22" }
+    - { proto: "tcp", addr: "10.16.56.101", port: "80" }
+  ignore_errors: yes
+
+- name: "check the listen ports.."
+  check_listen:
+    addr: "{{ item.addr }}"
+    port: "{{ item.port }}"
+  with_items:
+    - { addr: "10.16.56.101", port: "3000" }
+    - { addr: "10.16.56.101", port: "111" }
+  ignore_errors: yes
+
+- name: "check the listen ports.."
+  check_listen:
+    port: "{{ item.port }}"
+  with_items:
+    - { port: "111" }
+  ignore_errors: yes
+
+- name: "check the listen ports.."
+  check_listen:
+    proto: "{{ item.proto }}"
+    port: "{{ item.port }}"
+  with_items:
+    - { proto: "udp", port: "67" }
+    - { proto: "tcp", port: "111" }
+  ignore_errors: yes

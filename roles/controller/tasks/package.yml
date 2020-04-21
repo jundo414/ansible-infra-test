@@ -1,7 +1,0 @@
----
-- include_tasks: _package.yml
-  with_items:
-    - { name: "httpd", min_version: "2.2" }
-    - { name: "python3", min_version: "3.4" }
-  loop_control:
-    loop_var: target

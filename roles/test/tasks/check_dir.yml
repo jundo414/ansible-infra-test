@@ -1,0 +1,12 @@
+---
+- name: "check directory.."
+  check_dir:
+    path: "{{ item.path }}"
+    user: "{{ item.user }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { path: "/var/tmp", user: "root", group: "root", mode: "1777" }
+    - { path: "/root", user: "root", group: "root", mode: "0550" }
+    - { path: "/home/stack", user: "stack", group: "stack", mode: "0700" }
+  ignore_errors: yes

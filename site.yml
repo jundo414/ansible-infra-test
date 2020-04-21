@@ -1,1 +1,3 @@
-- import_playbook: hc.yml
+- hosts: server
+  roles:
+    - test
